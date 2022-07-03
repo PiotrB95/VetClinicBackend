@@ -1,19 +1,26 @@
-import express from 'express';
+import express,{json} from 'express';
 import cors from 'cors';
 import 'express-async-errors';
+import {handleError} from "./error/error";
+import rateLimit from "express-rate-limit";
 
 const app = express();
 app.use(cors({
     origin: 'http://localhost:3000'
 }));
-app.use(express.json());
+app.use(json());
+
+app.use(rateLimit({
+    windowMs: 10 * 60 * 1000, //10 min
+    max: 150,
+}))
+
+
 
 //Routers
 
 
-app.get('/', async (req, res)=>{
-    throw new Error('Oj lipa');
-})
+app.use(handleError);
 
 app.listen(3001,'0.0.0.0', ()=>{
     console.log('Aplikacja działa na porcie http://localhost:3001')

@@ -1,9 +1,6 @@
-import {PetEntity} from "../types";
+import {PetEntity, PetRecordResults} from "../types";
 import {ValidationError} from "../error/error";
-
-interface NewPetEntity extends Omit<PetEntity, 'id'>{
-    id?: string;
-}
+import {pool} from "../utils/db";
 
 export class PetRecord implements PetEntity{
     id: string;
@@ -39,5 +36,26 @@ export class PetRecord implements PetEntity{
         if(!obj.lastVaccinate){
             throw new ValidationError('Nie podano daty ostatniego szczepienia.')
         }
+
+        if(!obj.lastVaccinate){
+            throw new ValidationError('Nie podano daty kolejnego szczepienia.')
+        }
+
+        this.id = obj.id;
+        this.petName = obj.petName;
+        this.petType = obj.petType;
+        this.petAge = obj.petAge;
+        this.ownerName = obj.ownerName;
+        this.ownerPhone = obj.ownerPhone;
+        this.lastVaccinate = obj.lastVaccinate;
+        this.nextVaccinate = obj.nextVaccinate;
+    }
+
+    static async getOnePet(id: string): Promise<PetRecord |null> {
+        const [results] = await pool.execute("SELECT * FROM `pets` WHERE id = :id",{
+            id,
+        }) as PetRecordResults;
+
+        return results.length === 0 ? null : new PetRecord(results[0]);
     }
 }
