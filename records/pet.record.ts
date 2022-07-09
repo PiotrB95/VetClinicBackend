@@ -1,6 +1,7 @@
 import {PetEntity, PetRecordResults} from "../types";
 import {ValidationError} from "../error/error";
 import {pool} from "../utils/db";
+import {v4 as uuid} from 'uuid';
 
 export class PetRecord implements PetEntity{
     id: string;
@@ -57,5 +58,26 @@ export class PetRecord implements PetEntity{
         }) as PetRecordResults;
 
         return results.length === 0 ? null : new PetRecord(results[0]);
+    }
+
+    static async findAllPets(search: string): Promise<PetRecord[] |null> {
+        const [results] = await pool.execute("SELECT * FROM `pets` WHERE petName LIKE :search OR petType LIKE :search OR ownerName LIKE :search ",{
+            search: `%${search}%`,
+        }) as PetRecordResults;
+
+        return results.map(result => new PetRecord(result));
+    }
+
+    async insert(): Promise<void>{
+        if(!this.id){
+            this.id = uuid();
+        }else{
+            throw new Error('Cannot add pet, its already in database.')
+        };
+
+        await pool.execute("INSERT INTO `pets` (`id`, `petName`, `petType`, `petAge`, `ownerName`, `ownerPhone`, `lastVaccinate`, `nextVaccinate`) VALUES (:id, :petName,:petType, :petAge, :ownerName, :ownerPhone, :lastVaccinate, :nextVaccinate)", this );
+
+
+
     }
 }

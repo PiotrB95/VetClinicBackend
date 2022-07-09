@@ -6,6 +6,7 @@ export interface NewPetEntity extends Omit<PetEntity, 'id'>{
 
 export type PetRecordResults = [PetEntity[],FieldPacket[]];
 
+
 export interface PetEntity {
     id: string;
     petName: string;
@@ -16,3 +17,5 @@ export interface PetEntity {
     lastVaccinate: Date;
     nextVaccinate: Date;
 }
+
+
