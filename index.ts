@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'express-async-errors';
 import {handleError} from "./error/error";
 import rateLimit from "express-rate-limit";
+import {petRouter} from "./routers/pet.router";
 
 const app = express();
 app.use(cors({
@@ -18,7 +19,7 @@ app.use(rateLimit({
 
 
 //Routers
-
+app.use('/pet', petRouter);
 
 app.use(handleError);
 

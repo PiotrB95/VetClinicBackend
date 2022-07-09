@@ -76,8 +76,20 @@ export class PetRecord implements PetEntity{
         };
 
         await pool.execute("INSERT INTO `pets` (`id`, `petName`, `petType`, `petAge`, `ownerName`, `ownerPhone`, `lastVaccinate`, `nextVaccinate`) VALUES (:id, :petName,:petType, :petAge, :ownerName, :ownerPhone, :lastVaccinate, :nextVaccinate)", this );
+    }
 
+     static async delete(id: string): Promise<void>{
+        if(!id){
+            throw new Error('Cannot delete pet without ID');
+        }
 
+        const petToDelete = await PetRecord.getOnePet(id);
+        if(!petToDelete){
+            throw new Error('No such pet in database')
+        }
 
+        await pool.execute("DELETE FROM `pets` WHERE id = :id",{
+            id,
+        });
     }
 }
