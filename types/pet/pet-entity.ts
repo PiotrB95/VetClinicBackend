@@ -14,8 +14,8 @@ export interface PetEntity {
     petAge: number;
     ownerName: string;
     ownerPhone: number;
-    lastVaccinate: Date;
-    nextVaccinate: Date;
+    lastVaccinate: string;
+    nextVaccinate: string;
 }
 
 

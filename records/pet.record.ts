@@ -10,8 +10,8 @@ export class PetRecord implements PetEntity{
     petAge: number;
     ownerName: string;
     ownerPhone: number;
-    lastVaccinate: Date;
-    nextVaccinate: Date;
+    lastVaccinate: string;
+    nextVaccinate: string;
 
     constructor(obj: PetEntity) {
         if(!obj.petName || obj.petName.length > 36){
@@ -34,12 +34,12 @@ export class PetRecord implements PetEntity{
             throw new ValidationError('Podano nieprawidłowy numer telefonu właściciela.')
         }
 
-        if(!obj.lastVaccinate){
-            throw new ValidationError('Nie podano daty ostatniego szczepienia.')
+        if(!obj.lastVaccinate || obj.lastVaccinate.length>10){
+            throw new ValidationError('Nie podano daty ostatniego szczepienia, lub jest ona nieprawidłowa.')
         }
 
-        if(!obj.lastVaccinate){
-            throw new ValidationError('Nie podano daty kolejnego szczepienia.')
+        if(!obj.nextVaccinate || obj.nextVaccinate.length>10){
+            throw new ValidationError('Nie podano daty kolejnego szczepienia, lub jest ona nieprawidłowa.')
         }
 
         this.id = obj.id;
