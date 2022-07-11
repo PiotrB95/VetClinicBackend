@@ -92,4 +92,20 @@ export class PetRecord implements PetEntity{
             id,
         });
     }
+
+    static async update(id: string, lastVaccinate:string, nextVaccinate: string): Promise<void>{
+        if(!id){
+            throw new Error('Cannot update pet without ID');
+        }
+        const petToDelete = await PetRecord.getOnePet(id);
+        if(!petToDelete){
+            throw new Error('No such pet in database')
+        }
+
+        await pool.execute("UPDATE `pets` SET lastVaccinate = :lastVaccinate, nextVaccinate = :nextVaccinate WHERE id = :id",{
+            id,
+            lastVaccinate,
+            nextVaccinate
+        });
+    }
 }

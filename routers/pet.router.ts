@@ -21,4 +21,8 @@ export const petRouter = Router()
         await PetRecord.delete(req.params.id);
         res.json(req.params.id);
     })
+    .patch('/:id/:lastVaccinate/:nextVaccinate', async (req,res)=>{
+        await PetRecord.update(req.params.id,req.params.lastVaccinate,req.params.nextVaccinate);
+        res.json(req.params.id);
+    })
 
