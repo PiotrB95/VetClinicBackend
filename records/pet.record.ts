@@ -61,7 +61,7 @@ export class PetRecord implements PetEntity{
     }
 
     static async findAllPets(search: string): Promise<PetRecord[] |null> {
-        const [results] = await pool.execute("SELECT * FROM `pets` WHERE petName LIKE :search OR petType LIKE :search OR ownerName LIKE :search ",{
+        const [results] = await pool.execute("SELECT * FROM `pets` WHERE petName LIKE :search OR petType LIKE :search OR ownerName LIKE :search ORDER BY petName ASC",{
             search: `%${search}%`,
         }) as PetRecordResults;
 
