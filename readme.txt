@@ -7,4 +7,4 @@ Opis aplikacji:
 Wymagania:
 1. Pilki z repozytorium, zarówno w folderze z frontendem jak i z backandem w folderze package.json znajdują się skrypty o nazwie "start", które uruchamiają aplikację.
 2. Serwer lokalny.
-3. Baza danych o odpowiedniej strukturze (zał.).
+3. Baza danych o odpowiedniej strukturze ("baza.txt").
