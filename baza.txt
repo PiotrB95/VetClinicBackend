@@ -1,0 +1,41 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Wersja serwera:               10.4.21-MariaDB - mariadb.org binary distribution
+-- Serwer OS:                    Win64
+-- HeidiSQL Wersja:              11.3.0.6295
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Zrzut struktury tabela vetclinic.pets
+CREATE TABLE IF NOT EXISTS `pets` (
+  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `petName` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `petType` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `petAge` int(3) NOT NULL,
+  `ownerName` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ownerPhone` int(9) NOT NULL,
+  `lastVaccinate` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `nextVaccinate` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Zrzucanie danych dla tabeli vetclinic.pets: ~6 rows (około)
+/*!40000 ALTER TABLE `pets` DISABLE KEYS */;
+INSERT INTO `pets` (`id`, `petName`, `petType`, `petAge`, `ownerName`, `ownerPhone`, `lastVaccinate`, `nextVaccinate`) VALUES
+	('08efe3d1-9f9d-48fa-8434-fefd49a3af86', 'Kot1', 'Kot', 3, 'Właściciel1', 454545454, '2022-07-11', '2023-07-11'),
+	('27e328e3-1fc6-47c1-93f7-4b45b9ccd191', 'Kot2', 'Kot', 4, 'Właściciel2', 123456789, '2021-12-05', '2022-12-05'),
+	('304d2b57-c8f1-410e-8b1d-8720c1c4d1b0', 'Pająk1', 'Pająk', 2, 'Właściciel3', 292929292, '2022-07-11', '2023-07-11'),
+	('55b61e03-f622-4d23-8b9c-6e72638a14ae', 'Żółw1', 'Żółw', 5, 'Właściciel4', 989898989, '2022-07-04', '2022-07-30'),
+	('51660c47-9ca5-4b44-acf1-33369a356df4', 'Pies1', 'Pies', 5, 'Właściciel4', 123456789, '2021-03-21', '2023-08-12'),
+	('1c07d3db-25e1-4431-8a39-79484a22f0a6', 'Ryś1', 'Ryś', 4, 'Właściciel5', 152451452, '2022-07-13', '2023-07-13');
+/*!40000 ALTER TABLE `pets` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
